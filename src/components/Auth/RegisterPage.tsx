@@ -1,16 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LoginSocial from './LoginSocial';
-import * as Yup from 'yup';
-import { Input } from '../Form';
 import { Form, Formik } from 'formik';
+import { ChangeEvent, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import { AuthContext, IAuthContext } from '~/context/AuthContext';
+import { Input } from '../Form';
+import LoginSocial from './LoginSocial';
 
 const RegisterPage = () => {
   const validate = Yup.object({
     username: Yup.string().required('Username is required !'),
+    address: Yup.string().required('Address is required !'),
     birthOfDate: Yup.string().required('Birthday is required !'),
-    first_name: Yup.string().required('Firstname is required !'),
-    last_name: Yup.string().required('Lastname is required !'),
+    firstName: Yup.string().required('Firstname is required !'),
+    lastName: Yup.string().required('Lastname is required !'),
     phone: Yup.number().typeError('Enter a valid phone !').required('Phone is required !'),
     password: Yup.string().required('Password is required !'),
     email: Yup.string()
@@ -18,11 +20,34 @@ const RegisterPage = () => {
       .typeError('Please enter an valid email !')
       .required('Email is required !'),
   });
+
+  const [avatar, setAvatar] = useState<FileList | null>(null);
+
+  const { register } = useContext(AuthContext) as IAuthContext;
+
   const handleSubmit = (values: any) => {
     const splits = values['birthOfDate'].split('-');
     values['birthOfDate'] = `${splits[2]}-${splits[1]}-${splits[0]}`;
-    console.log(values);
+    const { username, birthOfDate, firstName, lastName, phone, password, email, address } = values;
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('birthOfDate', birthOfDate);
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('phone', phone);
+    formData.append('password', password);
+    formData.append('email', email);
+    formData.append('address', address);
+    if (avatar) {
+      formData.append('avatar', avatar[0]);
+    }
+    register(formData);
   };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAvatar(e.target.files);
+  };
+
   return (
     <section>
       <div className='container'>
@@ -34,11 +59,12 @@ const RegisterPage = () => {
               initialValues={{
                 username: '',
                 birthOfDate: '',
-                first_name: '',
-                last_name: '',
+                firstName: '',
+                lastName: '',
                 phone: '',
                 password: '',
                 email: '',
+                address: '',
               }}
             >
               {(_) => (
@@ -53,9 +79,35 @@ const RegisterPage = () => {
                     </div>
                     <div className='crs_log__caption'>
                       <div className='rcs_log_123'>
-                        <div className='rcs_ico'>
-                          <i className='fas fa-user' />
-                        </div>
+                        <input
+                          type='file'
+                          id='avatar'
+                          className='d-none'
+                          onChange={handleFileChange}
+                        />
+                        <label
+                          className='rcs_ico pointer'
+                          style={{
+                            position: 'relative',
+                          }}
+                          htmlFor='avatar'
+                        >
+                          {avatar ? (
+                            <img src={URL.createObjectURL(avatar[0])} alt='' />
+                          ) : (
+                            <i className='fas fa-user' />
+                          )}
+
+                          <i
+                            className='fa fa-camera position-absolute'
+                            style={{
+                              top: 0,
+                              right: 0,
+                              fontSize: 28,
+                            }}
+                            aria-hidden='true'
+                          ></i>
+                        </label>
                       </div>
                       <div className='rcs_log_124'>
                         <div className='Lpo09'>
@@ -65,13 +117,13 @@ const RegisterPage = () => {
                           <div className='col-xl-6 col-lg-12 col-md-12 col-sm-12'>
                             <div className='form-group'>
                               <label>First Name</label>
-                              <Input type='text' name='first_name' placeholder='First Name' />
+                              <Input type='text' name='firstName' placeholder='First Name' />
                             </div>
                           </div>
                           <div className='col-xl-6 col-lg-12 col-md-12 col-sm-12'>
                             <div className='form-group'>
                               <label>Last Name</label>
-                              <Input type='text' name='last_name' placeholder='Last Name' />
+                              <Input type='text' name='lastName' placeholder='Last Name' />
                             </div>
                           </div>
                         </div>
@@ -86,6 +138,10 @@ const RegisterPage = () => {
                         <div className='form-group'>
                           <label>Email</label>
                           <Input type='text' name='email' placeholder='support@themezhub.com' />
+                        </div>
+                        <div className='form-group'>
+                          <label>Address</label>
+                          <Input type='text' name='address' placeholder='Address' />
                         </div>
                         <div className='form-group'>
                           <label>Date of birth</label>

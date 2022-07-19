@@ -1,17 +1,19 @@
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import LoginSocial from './LoginSocial';
 import * as Yup from 'yup';
 import { Input } from '../Form';
+import { AuthContext, IAuthContext } from '~/context/AuthContext';
 
 const LoginForm = () => {
   const validate = Yup.object({
     username: Yup.string().required('Username is required !'),
     password: Yup.string().required('Password is required !'),
   });
+  const { login } = useContext(AuthContext) as IAuthContext;
   const handleSubmit = (values: any) => {
-    console.log(values);
+    login('default', values);
   };
 
   return (
@@ -45,7 +47,7 @@ const LoginForm = () => {
                 </div>
                 <div className='form-group'>
                   <label>Password</label>
-                  <Input type='text' placeholder='*******' name='password' />
+                  <Input type='password' placeholder='*******' name='password' />
                 </div>
 
                 <div className='form-group'>

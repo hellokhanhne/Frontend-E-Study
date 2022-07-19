@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext, IAuthContext } from '~/context/AuthContext';
+import './index.css';
+import UserLogin from './UserLogin';
 
 const Header = () => {
+  const {
+    authState: { user, isAuthenticate },
+  } = useContext(AuthContext) as IAuthContext;
+
   return (
     <>
       <div className='header theme-bg light-menu'>
@@ -15,12 +22,16 @@ const Header = () => {
               <div className='mobile_nav'>
                 <ul>
                   <li>
-                    <Link to='/login' className='crs_yuo12 w-auto text-white theme-bg'>
-                      <span className='embos_45'>
-                        <i className='fas fa-sign-in-alt mr-1' />
-                        Sign In
-                      </span>
-                    </Link>
+                    {!isAuthenticate ? (
+                      <Link to='/login' className='crs_yuo12 w-auto text-white theme-bg'>
+                        <span className='embos_45'>
+                          <i className='fas fa-sign-in-alt mr-1' />
+                          Sign In
+                        </span>
+                      </Link>
+                    ) : (
+                      <UserLogin avatar={user?.avatar} username={user?.username} />
+                    )}
                   </li>
                 </ul>
               </div>
@@ -61,17 +72,31 @@ const Header = () => {
                 </li> */}
               </ul>
               <ul className='nav-menu nav-menu-social align-to-right'>
-                <li>
-                  <Link to='/login' data-toggle='modal' data-target='#login'>
-                    <i className='fas fa-sign-in-alt mr-1' />
-                    <span className='dn-lg'>Sign In</span>
-                  </Link>
-                </li>
-                <li className='add-listing bg-white'>
-                  <a href='signup.html' className='text-white'>
-                    Get Started
-                  </a>
-                </li>
+                {!isAuthenticate ? (
+                  <>
+                    <li>
+                      <Link to='/login' data-toggle='modal' data-target='#login'>
+                        <i className='fas fa-sign-in-alt mr-1' />
+                        <span className='dn-lg'>Sign In</span>
+                      </Link>
+                    </li>
+                    <li className='add-listing bg-white'>
+                      <a href='signup.html' className='text-white'>
+                        Get Started
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <li
+                    className='d-flex pointer'
+                    style={{
+                      height: 80,
+                    }}
+                  >
+                    {' '}
+                    <UserLogin avatar={user?.avatar} username={user?.username} />
+                  </li>
+                )}
               </ul>
             </div>
           </nav>

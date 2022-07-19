@@ -1,6 +1,5 @@
-import React from 'react';
-
 const Review = () => {
+  return <></>;
   return (
     <section className='gray'>
       <div className='container'>

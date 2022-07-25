@@ -5,6 +5,7 @@ import './index.css';
 import UserLogin from './UserLogin';
 
 const Header = () => {
+  // console.log('re-render-header');
   const {
     authState: { user, isAuthenticate },
   } = useContext(AuthContext) as IAuthContext;
@@ -51,7 +52,7 @@ const Header = () => {
                   <Link to='/faq'>FAQ</Link>
                 </li>
                 <li>
-                  <Link to='/dashboard'>Dashboard</Link>
+                  <a href='/dashboard'>Dashboard</a>
                 </li>
                 {/* <li>
                   <a href='#'>
@@ -108,4 +109,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

@@ -1,3 +1,3 @@
 import { IUser } from './user.interface';
-
-export type { IUser };
+import { ICategory } from './category.interface';
+export type { IUser, ICategory };

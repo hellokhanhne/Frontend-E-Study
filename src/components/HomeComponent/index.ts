@@ -5,5 +5,15 @@ import Introduce from './Introduce';
 import News from './News';
 import Question from '../common/Question';
 import Review from '../common/Review';
+import CategoryCard from './CategoryCard';
 
-export { ExploreCourse, ExporeCategory, BestInstructor, Introduce, News, Question, Review };
+export {
+  ExploreCourse,
+  ExporeCategory,
+  BestInstructor,
+  Introduce,
+  News,
+  Question,
+  Review,
+  CategoryCard,
+};

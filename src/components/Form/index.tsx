@@ -1,3 +1,3 @@
 import Input from './Input';
-
-export { Input };
+import InputFile from './InputFile';
+export { Input, InputFile };

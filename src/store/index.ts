@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import categoryReducer from './reducers/categoryReducer';
 import loadingOverlayReducer from './reducers/loadingOverlayReducer';
 
 export function makeStore() {
   return configureStore({
     reducer: {
       loadingOverlay: loadingOverlayReducer,
+      category: categoryReducer,
     },
     devTools: true,
   });

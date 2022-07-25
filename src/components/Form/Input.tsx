@@ -8,7 +8,9 @@ const Input = ({ ...props }: any) => {
       <input
         {...field}
         {...props}
-        className={`form-control   ${meta.touched && meta.error && 'is-invalid'}`}
+        className={`form-control ${props.className}   ${
+          meta.touched && meta.error && 'is-invalid'
+        }`}
       />
       {meta.error && (
         <ErrorMessage component='div' name={field.name} className='invalid-feedback' />

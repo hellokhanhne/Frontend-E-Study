@@ -1,6 +1,17 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
+import { categorySelector, getAllCategory } from '~/store/reducers/categoryReducer';
+import CategoryCard from './CategoryCard';
 
 const ExporeCategory = () => {
+  const dispatch = useAppDispatch();
+
+  const { categories } = useAppSelector(categorySelector);
+
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
+
   return (
     <div>
       <section className='min gray'>
@@ -20,126 +31,10 @@ const ExporeCategory = () => {
           </div>
           <div className='row justify-content-center'>
             {/* Single Category */}
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-code' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Development</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-window-restore' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Web Designing</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-leaf' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Lifestyle</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-heartbeat' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Health &amp; Fitness</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-landmark' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Gov. Exams</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-photo-video' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Photography</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-stamp' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Finance &amp; Accounting</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className='col-xl-3 col-lg-4 col-md-4 col-sm-6'>
-              <div className='crs_cate_wrap style_2'>
-                <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
-                  <div className='crs_cate_icon'>
-                    <i className='fa fa-school' />
-                  </div>
-                  <div className='crs_cate_caption'>
-                    <span>Office Productivity</span>
-                  </div>
-                  <div className='crs_cate_count'>
-                    <span>22 Lectures</span>
-                  </div>
-                </a>
-              </div>
-            </div>
+
+            {categories.map((c) => (
+              <CategoryCard category={c} key={c.id} />
+            ))}
           </div>
         </div>
       </section>

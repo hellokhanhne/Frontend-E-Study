@@ -1,6 +1,5 @@
 import CategoryManage from '~/adminPage/Category/CategoryManage';
 import UpdateCategory from '~/adminPage/Category/UpdateCategory';
-import AdminLayout from '~/Layout/AdminLayout';
 import { Home } from '~/pages';
 import NotFoundPage from '~/pages/404NotFound';
 import About from '~/pages/About';

@@ -17,6 +17,7 @@ export interface IAuthContext {
   authState: IInitstate;
   register: (payload: any) => Promise<void>;
   login: (type: ILoginType, payload: any) => Promise<void>;
+  updateProfile: (payload: FormData) => Promise<void>;
 }
 
 const initState: IInitstate = {
@@ -162,6 +163,30 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateProfile = async (payload: FormData) => {
+    try {
+      const res = await authApi.updateProfile(payload, authState.user.id);
+      const { data } = res.data;
+      dispatch({
+        type: ActionKind.CHANGE_AUTH_STATE,
+        payload: {
+          ...authState,
+          user: data,
+        },
+      });
+      toastEmit({
+        message: 'Update profile successfully !',
+        type: 'success',
+      });
+    } catch (error) {
+      toastEmit({
+        message: 'Update profile failed !',
+        type: 'error',
+      });
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
     loadUser(access_token);
@@ -171,6 +196,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     authState,
     register,
     login,
+    updateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

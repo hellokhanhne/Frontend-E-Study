@@ -1,5 +1,6 @@
 import CategoryManage from '~/adminPage/Category/CategoryManage';
 import UpdateCategory from '~/adminPage/Category/UpdateCategory';
+import Profile from '~/adminPage/Profile';
 import { Home } from '~/pages';
 import NotFoundPage from '~/pages/404NotFound';
 import About from '~/pages/About';
@@ -58,6 +59,10 @@ export const lecturerRoutes: IRoute[] = [
   {
     path: '/dashboard',
     element: <></>,
+  },
+  {
+    path: '/manage/profile',
+    element: <Profile />,
   },
   {
     path: '/manage/category',

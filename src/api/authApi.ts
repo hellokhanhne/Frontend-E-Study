@@ -20,6 +20,10 @@ const authApi = {
   loadUser() {
     return baseAxios.get('/user/me');
   },
+
+  updateProfile(data: any, id: number) {
+    return baseAxios.put(`/user/${id}`, data);
+  },
 };
 
 export default authApi;

@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext, IAuthContext } from '~/context/AuthContext';
+import { useScript } from '~/hooks';
 import './index.css';
 import UserLogin from './UserLogin';
 
 const Header = () => {
   // console.log('re-render-header');
+
+  useScript('/assets/js/navigation.js');
   const {
     authState: { user, isAuthenticate },
   } = useContext(AuthContext) as IAuthContext;
@@ -52,7 +55,7 @@ const Header = () => {
                   <Link to='/faq'>FAQ</Link>
                 </li>
                 <li>
-                  <a href='/dashboard'>Dashboard</a>
+                  <Link to='/dashboard'>Dashboard</Link>
                 </li>
                 {/* <li>
                   <a href='#'>

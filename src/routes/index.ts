@@ -1,3 +1,3 @@
-import { publicRoutes } from './publicRouter';
+import { publicRoutes, lecturerRoutes } from './routes';
 
-export { publicRoutes };
+export { publicRoutes, lecturerRoutes };

@@ -88,14 +88,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const res = await authApi[type](payload);
       const { data } = res.data;
 
-      // dispatch({
-      //   type: ActionKind.CHANGE_AUTH_STATE,
-      //   payload: {
-      //     user: data,
-      //     isAuthenticate: true,
-      //     isLoading: false,
-      //   },
-      // });
+      dispatch({
+        type: ActionKind.CHANGE_AUTH_STATE,
+        payload: {
+          user: data,
+          isAuthenticate: true,
+          isLoading: false,
+        },
+      });
       dispatchRedux(changeLoading(false));
       setToken(data.token);
       localStorage.setItem('access_token', data.token);
@@ -103,7 +103,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         message: 'Login successfully !',
         type: 'success',
       });
-      window.location.reload();
+      // window.location.reload();
       //   localStorage.setItem('refresh_token', data.refresh_token);
     } catch (error: any) {
       console.log(error);

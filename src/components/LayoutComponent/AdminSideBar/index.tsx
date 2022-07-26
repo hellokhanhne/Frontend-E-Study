@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useScript } from '~/hooks';
 
 const AdminSideBar = () => {
+  useScript('/assets/js/sidebaradmin.js');
   return (
     <div className='dashboard-navbar'>
       <div className='d-user-avater'>
@@ -179,7 +181,7 @@ const AdminSideBar = () => {
             </Link>
           </li>
           <li>
-            <Link to='my-profile.html'>
+            <Link to='/manage/profile'>
               <i className='fas fa-address-card' />
               My Profile
             </Link>

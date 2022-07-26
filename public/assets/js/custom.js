@@ -21,9 +21,6 @@ $(function () {
       .html('<a href="tel:' + tel + '">' + tel + '</a>');
   });
 
-  // Metis Menu
-  $('#side-menu').metisMenu();
-
   // Tooltip
   $('[data-toggle="tooltip"]').tooltip();
 

@@ -1,34 +1,14 @@
 import React from 'react';
+import { ICourseCommonProps } from './props.common.interface';
 
-const OverviewCourse = () => {
+const OverviewCourse = ({ course }: ICourseCommonProps) => {
   return (
     <>
       <div className='edu_wraper'>
-        <h4 className='edu_title'>Course Overview</h4>
-        <p>
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-          voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-          cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id
-          est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-        </p>
-        <p>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-          architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-          voluptatem sequi nesciunt.
-        </p>
-        <h6>Requirements</h6>
-        <ul className='lists-3'>
-          <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-          <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-          <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-          <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-          <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-        </ul>
+        <div dangerouslySetInnerHTML={{ __html: course?.description }}></div>
       </div>
       <div className='edu_wraper'>
-        <h4 className='edu_title'>Course Circullum</h4>
+        <h4 className='edu_title'>Course Lession Structure</h4>
         <div id='accordionExample' className='accordion shadow circullum'>
           {/* Part 1 */}
           <div className='card'>

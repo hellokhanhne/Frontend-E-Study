@@ -1,5 +1,9 @@
 import CategoryManage from '~/adminPage/Category/CategoryManage';
 import UpdateCategory from '~/adminPage/Category/UpdateCategory';
+import CreateCourse from '~/adminPage/Course/CreateCourse';
+import ManageCourse from '~/adminPage/Course/ManageCourse';
+import UpdateCourse from '~/adminPage/Course/UpdateCourse';
+
 import Profile from '~/adminPage/Profile';
 import { Home } from '~/pages';
 import NotFoundPage from '~/pages/404NotFound';
@@ -71,5 +75,17 @@ export const lecturerRoutes: IRoute[] = [
   {
     path: '/manage/category/:id',
     element: <UpdateCategory />,
+  },
+  {
+    path: '/manage/course',
+    element: <ManageCourse />,
+  },
+  {
+    path: '/manage/course/create',
+    element: <CreateCourse />,
+  },
+  {
+    path: '/manage/course/update/:id',
+    element: <UpdateCourse />,
   },
 ];

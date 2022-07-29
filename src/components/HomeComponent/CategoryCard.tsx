@@ -11,7 +11,13 @@ const CategoryCard = ({ category }: ICategoryCardProps) => {
       <div className='crs_cate_wrap style_2'>
         <a href='grid-layout-with-sidebar.html' className='crs_cate_box'>
           <div className='crs_cate_icon'>
-            <i className='fa fa-school' />
+            <img
+              src={category.avatar}
+              style={{
+                width: 50,
+                height: 50,
+              }}
+            />
           </div>
           <div className='crs_cate_caption'>
             <span>{category.name}</span>

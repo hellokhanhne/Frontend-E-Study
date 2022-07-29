@@ -9,4 +9,5 @@ export interface IUser {
   address: string;
   avatar: string;
   token: string;
+  role: string;
 }

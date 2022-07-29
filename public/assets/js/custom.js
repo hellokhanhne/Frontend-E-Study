@@ -163,9 +163,6 @@ $(function () {
     ],
   });
 
-  // Summernote
-  $('.summernote').summernote();
-
   // Choose Category
   $('#cates').select2({
     placeholder: 'Choose Category',

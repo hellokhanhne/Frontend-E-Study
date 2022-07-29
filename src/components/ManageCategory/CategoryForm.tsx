@@ -1,6 +1,8 @@
 import { Form, Formik } from 'formik';
 import { ChangeEvent, useState } from 'react';
 import * as Yup from 'yup';
+import { clearInputFile } from '~/utils/domUtils';
+import { FileState, handleFileStateError } from '~/utils/handleError';
 import { toastEmit } from '~/utils/toasify';
 import { validateImage } from '~/utils/validateFile';
 import { Input, InputFile } from '../Form';
@@ -16,22 +18,18 @@ const _initValue = {
   description: '',
 };
 
-interface FileState {
-  error: string;
-  fileList: FileList | null;
-}
-
 const CategoryForm = ({ onSubmit, initValue = _initValue, typeForm }: ICategoryFormProps) => {
+  // validate form
   const validate = Yup.object({
     name: Yup.string().required('Name category is required !'),
     description: Yup.string().required('Description category is required !'),
   });
-
+  //state file avatar
   const [file, setFile] = useState<FileState>({
     fileList: null,
     error: '',
   });
-
+  // handle change file input
   const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const err = validateImage(e.target.files);
     if (err) {
@@ -44,16 +42,30 @@ const CategoryForm = ({ onSubmit, initValue = _initValue, typeForm }: ICategoryF
     });
   };
 
+  // change check file when click submit
+  const handleCheckFile = () => {
+    if (typeForm === 'create') {
+      if (!handleFileStateError(file, setFile)) {
+        return false;
+      }
+    }
+    return true;
+  };
+  // handle submit form
   const handleSubmit = (values: any, { resetForm }: any) => {
-    if (!file.fileList && typeForm === 'create') {
-      return setFile({ ...file, error: 'Avatar file is required !' });
+    if (typeForm === 'create') {
+      if (!handleCheckFile) {
+        return;
+      }
     }
 
     onSubmit({
       ...values,
       avatar: file.fileList ? file.fileList[0] : null,
     });
+
     resetForm();
+    clearInputFile('avatar');
     setFile({
       error: '',
       fileList: null,

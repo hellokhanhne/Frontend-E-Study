@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
 import Breadcrumb from '~/components/common/Breadcrumb';
 import { CategoryForm } from '~/components/ManageCategory';
 import CategoryCard from '~/components/ManageCategory/CategoryCard';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
-import { categorySelector, createCategory, getAllCategory } from '~/store/reducers/categoryReducer';
+import { categorySelector, createCategory } from '~/store/reducers/categoryReducer';
 
 const CategoryManage = () => {
   const { categories } = useAppSelector(categorySelector);
@@ -17,10 +16,6 @@ const CategoryManage = () => {
 
     dispatch(createCategory(formdata));
   };
-
-  useEffect(() => {
-    dispatch(getAllCategory());
-  }, []);
 
   return (
     <>

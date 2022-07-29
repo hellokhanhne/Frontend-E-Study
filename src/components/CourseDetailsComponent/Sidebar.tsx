@@ -1,31 +1,34 @@
 import React from 'react';
+import { getCurrentPrice } from '~/utils/priceUtils';
+import { ICourseCommonProps } from './props.common.interface';
 
-const Sidebar = () => {
+const Sidebar = ({ course }: ICourseCommonProps) => {
   return (
     <div className='col-lg-4 col-md-12 order-lg-last'>
       <div className='ed_view_box style_2 stick_top'>
         <div className='ed_author'>
           <h2 className='theme-cl m-0'>
-            $149.00<span className='old_prc'>$299.00</span>
+            ${getCurrentPrice(course?.price, course?.sale_percent).toFixed(2)}
+            <span className='old_prc'>${course?.price.toFixed(2)}</span>
           </h2>
         </div>
         <div className='ed_view_features'>
-          <div className='eld mb-3'>
+          {/* <div className='eld mb-3'>
             <h5 className='font-medium'>This Course Include:</h5>
             <p>
               Aaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
               sunt explicabo.
             </p>
-          </div>
+          </div> */}
           <div className='eld mb-3'>
             <ul className='edu_list right'>
               <li>
                 <i className='ti-user' />
-                Student Enrolled:<strong>1740</strong>
+                Student Enrolled:<strong>{course?.enrollNumber}</strong>
               </li>
               <li>
                 <i className='ti-files' />
-                Topic:<strong>PHP Script</strong>
+                Topic:<strong>{course?.category.name}</strong>
               </li>
               <li>
                 <i className='ti-game' />

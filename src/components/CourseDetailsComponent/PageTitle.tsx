@@ -1,20 +1,21 @@
 import React from 'react';
+import { ICourseCommonProps } from './props.common.interface';
 
-const PageTitle = () => {
+const PageTitle = ({ course }: ICourseCommonProps) => {
   return (
     <div className='ed_detail_head'>
       <div className='container'>
         <div className='row align-items-center'>
-          <div className='col-lg-8 col-md-7'>
+          <div className='col-lg-8 '>
             <div className='ed_detail_wrap'>
               <div className='crs_cates cl_1'>
-                <span>Design</span>
+                <span>{course?.category.name}</span>
               </div>
               <div className='crs_cates cl_3'>
-                <span>Design</span>
+                <span>{course?.category.name}</span>
               </div>
               <div className='ed_header_caption'>
-                <h2 className='ed_title'>Ruby on Rails Program</h2>
+                <h2 className='ed_title'>{course?.name}</h2>
                 <ul>
                   <li>
                     <i className='ti-calendar' />
@@ -26,17 +27,12 @@ const PageTitle = () => {
                   </li>
                   <li>
                     <i className='ti-user' />
-                    502 Student Enrolled
+                    {course?.enrollNumber} Student Enrolled
                   </li>
                 </ul>
               </div>
               <div className='ed_header_short'>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum. accusantium doloremque laudantium, totam rem aperiam,
-                  eaque ipsa quae ab illo inventore. veritatis et quasi architecto beatae vitae
-                  dicta sunt explicabo.
-                </p>
+                <p>{course?.short_desc}</p>
               </div>
               <div className='ed_rate_info'>
                 <div className='star_info'>
@@ -51,6 +47,9 @@ const PageTitle = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className='col-lg-4'>
+            <img className='w-100 h-100p cover rounded' src={course?.imageUrl} alt='' />
           </div>
         </div>
       </div>

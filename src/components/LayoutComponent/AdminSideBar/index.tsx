@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext, IAuthContext } from '~/context';
 import { useScript } from '~/hooks';
 
 const AdminSideBar = () => {
   useScript('/assets/js/sidebaradmin.js');
+  const {
+    authState: { user },
+  } = useContext(AuthContext) as IAuthContext;
+
+  const handleOnclick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+  };
   return (
     <div className='dashboard-navbar'>
       <div className='d-user-avater'>
-        <img src='https://via.placeholder.com/500x500' className='img-fluid avater' alt='' />
-        <h4>Adam Harshvardhan</h4>
-        <span>Senior Designer</span>
+        <img src={user?.avatar} className='img-fluid avater' alt='' />
+        <h4>{user?.firstName + ' ' + user?.lastName}</h4>
+        <span>Lecturer</span>
         <div className='elso_syu89'>
           <ul>
             <li>
@@ -64,105 +72,114 @@ const AdminSideBar = () => {
             </Link>
           </li>
           <li className='dropdown'>
-            <Link to='javascript:void(0);'>
+            <Link onClick={handleOnclick} to='#'>
               <i className='fas fa-shopping-basket' />
               Courses
               <span className='ti-angle-left' />
             </Link>
             <ul className='nav nav-second-level'>
               <li>
-                <Link to='manage-course.html'>Manage Courses</Link>
+                <Link to='/manage/course'>Manage Courses</Link>
               </li>
               <li>
-                <Link to='add-new-course.html'>Add New Course</Link>
+                <Link to='/manage/course/create'>Add New Course</Link>
               </li>
               <li>
                 <Link to='/manage/category'>Course Category</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to='coupons.html'>Coupons</Link>
-              </li>
+              </li> */}
             </ul>
           </li>
-          <li className='dropdown'>
-            <Link to='javascript:void(0);'>
-              <i className='fas fa-gem' />
-              Enrollment
-              <span className='ti-angle-left' />
-            </Link>
-            <ul className='nav nav-second-level'>
-              <li>
-                <Link to='enroll-history.html'>Enroll History</Link>
+          {user?.role === 'ROLE_ADMIN' && (
+            <>
+              <li className='dropdown'>
+                <Link onClick={handleOnclick} to='#'>
+                  <i className='fas fa-gem' />
+                  Enrollment
+                  <span className='ti-angle-left' />
+                </Link>
+                <ul className='nav nav-second-level'>
+                  <li>
+                    <Link to='enroll-history.html'>Enroll History</Link>
+                  </li>
+                  <li>
+                    <Link to='enroll-student.html'>Enroll a Student</Link>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <Link to='enroll-student.html'>Enroll a Student</Link>
-              </li>
-            </ul>
-          </li>
+            </>
+          )}
           <li className='dropdown'>
-            <Link to='javascript:void(0);'>
+            <Link onClick={handleOnclick} to='#'>
               <i className='fas fa-archive' />
               Report
               <span className='ti-angle-left' />
             </Link>
             <ul className='nav nav-second-level'>
               <li>
-                <Link to='admin-revenue.html'>Admin Revenue</Link>
+                <Link to='/manage/revenue'>Admin Revenue</Link>
               </li>
               <li>
-                <Link to='instructor-revenue.html'>Instructor Revenue</Link>
+                <Link to='/manage/instructor/revenue'>Instructor Revenue</Link>
               </li>
             </ul>
           </li>
-          <li className='dropdown'>
-            <Link to='javascript:void(0);'>
-              <i className='fas fa-user-shield' />
-              Admins
-              <span className='ti-angle-left' />
-            </Link>
-            <ul className='nav nav-second-level'>
-              <li>
-                <Link to='manage-admins.html'>Manage Admins</Link>
+          {user?.role === 'ROLE_ADMIN' && (
+            <>
+              <li className='dropdown'>
+                <Link onClick={handleOnclick} to='#'>
+                  <i className='fas fa-user-shield' />
+                  Admins
+                  <span className='ti-angle-left' />
+                </Link>
+                <ul className='nav nav-second-level'>
+                  <li>
+                    <Link to='manage-admins.html'>Manage Admins</Link>
+                  </li>
+                  <li>
+                    <Link to='add-admin.html'>Add New Admins</Link>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <Link to='add-admin.html'>Add New Admins</Link>
+              <li className='dropdown'>
+                <Link onClick={handleOnclick} to='#'>
+                  <i className='fas fa-toolbox' />
+                  Instructors
+                  <span className='ti-angle-left' />
+                </Link>
+                <ul className='nav nav-second-level'>
+                  <li>
+                    <Link to='manage-instructor.html'>Manage Instructors</Link>
+                  </li>
+                  <li>
+                    <Link to='add-instructor.html'>Add New Instructors</Link>
+                  </li>
+                  <li>
+                    <Link to='instructor-payout.html'>Instructors Payouts</Link>
+                  </li>
+                </ul>
               </li>
-            </ul>
-          </li>
-          <li className='dropdown'>
-            <Link to='javascript:void(0);'>
-              <i className='fas fa-toolbox' />
-              Instructors
-              <span className='ti-angle-left' />
-            </Link>
-            <ul className='nav nav-second-level'>
-              <li>
-                <Link to='manage-instructor.html'>Manage Instructors</Link>
+              <li className='dropdown'>
+                <Link onClick={handleOnclick} to='#'>
+                  <i className='fas fa-user' />
+                  Students
+                  <span className='ti-angle-left' />
+                </Link>
+                <ul className='nav nav-second-level'>
+                  <li>
+                    <Link to='manage-students.html'>Manage Students</Link>
+                  </li>
+                  <li>
+                    <Link to='add-students.html'>Add New Student</Link>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <Link to='add-instructor.html'>Add New Instructors</Link>
-              </li>
-              <li>
-                <Link to='instructor-payout.html'>Instructors Payouts</Link>
-              </li>
-            </ul>
-          </li>
-          <li className='dropdown'>
-            <Link to='javascript:void(0);'>
-              <i className='fas fa-user' />
-              Students
-              <span className='ti-angle-left' />
-            </Link>
-            <ul className='nav nav-second-level'>
-              <li>
-                <Link to='manage-students.html'>Manage Students</Link>
-              </li>
-              <li>
-                <Link to='add-students.html'>Add New Student</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
+            </>
+          )}
+
+          {/* <li>
             <Link to='addon-manager.html'>
               <i className='fas fa-layer-group' />
               Addon
@@ -179,7 +196,7 @@ const AdminSideBar = () => {
               <i className='fas fa-comments' />
               Message
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to='/manage/profile'>
               <i className='fas fa-address-card' />
@@ -187,7 +204,7 @@ const AdminSideBar = () => {
             </Link>
           </li>
           <li className='dropdown'>
-            <Link to='javascript:void(0);'>
+            <Link onClick={handleOnclick} to='#'>
               <i className='fas fa-cog' />
               Settings
               <span className='ti-angle-left' />

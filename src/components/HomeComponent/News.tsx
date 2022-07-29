@@ -52,7 +52,7 @@ const News = () => {
                         <div className='crs_tutor_thumb'>
                           <a href='instructor-detail.html'>
                             <img
-                              src='https://via.placeholder.com/500x500'
+                              src='https://via.placeholder.com/100'
                               className='img-fluid circle'
                               alt=''
                             />
@@ -113,7 +113,7 @@ const News = () => {
                         <div className='crs_tutor_thumb'>
                           <a href='instructor-detail.html'>
                             <img
-                              src='https://via.placeholder.com/500x500'
+                              src='https://via.placeholder.com/100'
                               className='img-fluid circle'
                               alt=''
                             />
@@ -174,7 +174,7 @@ const News = () => {
                         <div className='crs_tutor_thumb'>
                           <a href='instructor-detail.html'>
                             <img
-                              src='https://via.placeholder.com/500x500'
+                              src='https://via.placeholder.com/100'
                               className='img-fluid circle'
                               alt=''
                             />

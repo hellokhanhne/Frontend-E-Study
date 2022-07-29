@@ -1,19 +1,32 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import courseApi from '~/api/CourseApi';
 import {
   Instructor,
   OverviewCourse,
   PageTitle,
   Rating,
-  ReviewCourse,
+  RenderReview,
   Sidebar,
-  SubmitReview,
 } from '~/components/CourseDetailsComponent';
+import { ICourse } from '~/interface';
 
 const CourseDetails = () => {
+  const { id } = useParams();
+  const [course, setCourse] = useState<ICourse | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await courseApi.getOne(Number(id));
+      const { data } = res.data;
+      setCourse(data);
+    })();
+  }, []);
+
   return (
     <div>
       {/* ============================ Page Title Start================================== */}
-      <PageTitle />
+      <PageTitle course={course!} />
       {/* ============================ Page Title End ================================== */}
       {/* ============================ Course Detail ================================== */}
       <section className='gray'>
@@ -21,18 +34,15 @@ const CourseDetails = () => {
           <div className='row'>
             <div className='col-lg-8 col-md-12 order-lg-first'>
               {/* Overview */}
-              <OverviewCourse />
+              <OverviewCourse course={course!} />
               {/* Rating */}
               <Rating />
               {/* instructor */}
-              <Instructor />
-              {/* Reviews */}
-              <ReviewCourse />
-              {/* Submit Reviews */}
-              <SubmitReview />
+              <Instructor course={course!} />
+              <RenderReview />
             </div>
             {/* Sidebar */}
-            <Sidebar />
+            <Sidebar course={course!} />
           </div>
         </div>
       </section>

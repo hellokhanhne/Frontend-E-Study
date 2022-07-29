@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import LoadingOverlay from './components/common/LoadingOverlay';
@@ -8,13 +8,19 @@ import BaseLayout from './Layout/BaseLayout';
 import { lecturerRoutes, publicRoutes } from './routes';
 import ProtectedRouter from './routes/ProtectedRoute';
 
-import { useAppSelector } from './store/hooks';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { getAllCategory } from './store/reducers/categoryReducer';
 import { loadingSelector } from './store/reducers/loadingOverlayReducer';
 
 function App() {
   const { isLoading } = useAppSelector(loadingSelector);
   const { authState } = useContext(AuthContext) as IAuthContext;
-  // inject scripts
+  // dispatch get all category
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
 
   return (
     <>

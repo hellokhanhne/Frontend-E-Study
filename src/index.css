@@ -103,3 +103,31 @@
 .ldio-cycq6hmht div {
   box-sizing: content-box;
 }
+
+.card-action-button {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.card-action-button div {
+  cursor: pointer;
+}
+
+.card-action-button div:first-child {
+  margin-right: 15px;
+}
+
+.card-action-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.h-100p {
+  height: 100% !important;
+}

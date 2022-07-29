@@ -1,16 +1,17 @@
 import React from 'react';
+import { ICourseCommonProps } from './props.common.interface';
 
-const Instructor = () => {
+const Instructor = ({ course }: ICourseCommonProps) => {
   return (
     <div className='single_instructor'>
       <div className='single_instructor_thumb'>
-        <a href='#'>
-          <img src='https://via.placeholder.com/500x500' className='img-fluid' alt='' />
+        <a href='#' className='d-block h-100p'>
+          <img src={course?.instructor.avatar} className='img-fluid h-100p cover' alt='' />
         </a>
       </div>
       <div className='single_instructor_caption'>
         <h4>
-          <a href='#'>Jonathan Campbell</a>
+          <a href='#'>{course?.instructor.firstName + ' ' + course?.instructor.lastName}</a>
         </h4>
         <ul className='instructor_info'>
           <li>
@@ -26,9 +27,11 @@ const Instructor = () => {
             Exp. 4 Year
           </li>
         </ul>
-        <p>
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-          voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi.
+        <p className='mb-1'>
+          <b>Phone : </b> {course?.instructor.phone}
+        </p>
+        <p className='mb-1'>
+          <b>Email : </b> {course?.instructor.email}
         </p>
         <ul className='social_info'>
           <li>

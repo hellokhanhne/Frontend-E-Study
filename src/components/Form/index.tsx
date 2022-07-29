@@ -1,3 +1,4 @@
 import Input from './Input';
 import InputFile from './InputFile';
-export { Input, InputFile };
+import TextField from './TextField';
+export { Input, InputFile, TextField };

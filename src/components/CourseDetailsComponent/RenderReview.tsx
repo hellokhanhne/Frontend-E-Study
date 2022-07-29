@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import { useContext } from 'react';
+import { IReviewContext, ReviewContext } from './context';
 import ReviewCourse from './ReviewCourse';
 import SubmitReview from './SubmitReview';
 
 const RenderReview = () => {
-  const [reviews, setReviews] = useState();
+  const { createReview, reviews, setPage, totalPages, idCourse, loading, page, totalElements } =
+    useContext(ReviewContext) as IReviewContext;
 
   return (
     <>
       {/* Reviews */}
-      <ReviewCourse />
+      <ReviewCourse
+        totalElements={totalElements}
+        page={page}
+        totalPages={totalPages}
+        reviews={reviews}
+        setPage={setPage}
+        loading={loading}
+      />
       {/* Submit Reviews */}
-      <SubmitReview />
+      <SubmitReview idCourse={idCourse} createReview={createReview} />
     </>
   );
 };

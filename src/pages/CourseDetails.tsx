@@ -9,6 +9,7 @@ import {
   RenderReview,
   Sidebar,
 } from '~/components/CourseDetailsComponent';
+import ReviewConextProvider from '~/components/CourseDetailsComponent/context/ReviewContext';
 import { ICourse } from '~/interface';
 
 const CourseDetails = () => {
@@ -39,7 +40,9 @@ const CourseDetails = () => {
               <Rating />
               {/* instructor */}
               <Instructor course={course!} />
-              <RenderReview />
+              <ReviewConextProvider idCourse={Number(id)}>
+                <RenderReview />
+              </ReviewConextProvider>
             </div>
             {/* Sidebar */}
             <Sidebar course={course!} />

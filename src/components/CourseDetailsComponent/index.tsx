@@ -7,6 +7,7 @@ import Rating from './Rating';
 import ReviewCourse from './ReviewCourse';
 import RenderReview from './RenderReview';
 import { ICourseCommonProps } from './props.common.interface';
+import ReviewActionButton from './ReviewActionButton';
 
 export {
   PageTitle,
@@ -17,6 +18,7 @@ export {
   Rating,
   ReviewCourse,
   RenderReview,
+  ReviewActionButton,
 };
 
 export type { ICourseCommonProps };

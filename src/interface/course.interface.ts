@@ -1,3 +1,6 @@
+import { ICategory } from './category.interface';
+import { IUser } from './user.interface';
+
 interface ICourse {
   id: number;
   name: string;
@@ -7,22 +10,8 @@ interface ICourse {
   short_desc: string;
   imageUrl: string;
   enrollNumber: number;
-  category: {
-    id: number;
-    name: string;
-    avatar: string;
-    description: string;
-  };
-  instructor: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    dateCreated: string;
-    phone: string;
-    email: string;
-    address: string;
-    avatar: string;
-  };
+  category: ICategory;
+  instructor: IUser;
 }
 
 export type { ICourse };

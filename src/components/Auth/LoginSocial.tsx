@@ -19,7 +19,7 @@ const LoginSocial = () => {
         <ul className='social_log_45 row'>
           <li className='col-xl-4 col-lg-4 col-md-4 col-4'>
             <GoogleLogin
-              clientId='811883403522-joa6umtur8obllmajcsjflp0m3jkfs5i.apps.googleusercontent.com'
+              clientId='603221464013-ji6thsjj9862r5es12she2f5hgdjlsde.apps.googleusercontent.com'
               autoLoad={false}
               render={(renderProps) => (
                 <button className='sl_btn' onClick={renderProps.onClick}>

@@ -33,7 +33,7 @@ const LoginSocial = () => {
           </li>
           <li className='col-xl-4 col-lg-4 col-md-4 col-4'>
             <FacebookLogin
-              appId='464702251765680'
+              appId='1114707542461781'
               autoLoad={false}
               render={(renderProps) => (
                 <button className='sl_btn' onClick={renderProps.onClick}>

@@ -151,7 +151,12 @@ const Profile = () => {
                       </div>
                       <div className='form-group smalls'>
                         <label>Email</label>
-                        <Input type='email' name='email' placeholder='support@themezhub.com' />
+                        <Input
+                          disabled
+                          type='email'
+                          name='email'
+                          placeholder='support@themezhub.com'
+                        />
                       </div>
                       <div className='form-group smalls'>
                         <label>Phone</label>

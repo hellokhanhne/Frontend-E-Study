@@ -1,7 +1,6 @@
 import { ErrorMessage, Field } from 'formik';
-import React from 'react';
-import ImageUploader from 'quill-image-uploader';
-import ReactQuill, { Quill } from 'react-quill';
+// import ImageUploader from 'quill-image-uploader';
+import ReactQuill from 'react-quill';
 import { formats, modules } from '~/utils/editorConfig';
 
 interface ITextEditorProps {
@@ -10,7 +9,7 @@ interface ITextEditorProps {
   onChange: (value: string) => void;
 }
 
-Quill.register('modules/imageUploader', ImageUploader);
+// Quill.register('modules/imageUploader', ImageUploader);
 
 const TextEditor = ({ name, onChange, value }: ITextEditorProps) => {
   return (

@@ -34,7 +34,10 @@ const Header = () => {
                         </span>
                       </Link>
                     ) : (
-                      <UserLogin avatar={user?.avatar} username={user?.username} />
+                      <UserLogin
+                        avatar={user?.avatar}
+                        username={user?.firstName + ' ' + user?.lastName}
+                      />
                     )}
                   </li>
                 </ul>
@@ -98,7 +101,10 @@ const Header = () => {
                     }}
                   >
                     {' '}
-                    <UserLogin avatar={user?.avatar} username={user?.username} />
+                    <UserLogin
+                      avatar={user?.avatar}
+                      username={user?.firstName + ' ' + user?.lastName}
+                    />
                   </li>
                 )}
               </ul>

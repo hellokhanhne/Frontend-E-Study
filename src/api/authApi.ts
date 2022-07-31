@@ -10,11 +10,11 @@ const authApi = {
   },
 
   google: (data: any) => {
-    return baseAxios.post('/auth/login/google', data);
+    return baseAxios.post('/auth/google/signin', data);
   },
 
   facebook: (data: any) => {
-    return baseAxios.post('/auth/login/facebook', data);
+    return baseAxios.post('/auth/facebook/signin', data);
   },
 
   loadUser() {

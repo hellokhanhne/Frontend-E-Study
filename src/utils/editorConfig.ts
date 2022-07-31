@@ -1,5 +1,3 @@
-import baseAxios from '~/api/AxiosClient';
-
 export const modules = {
   toolbar: [
     [{ header: [] }, { font: [] }],
@@ -10,25 +8,7 @@ export const modules = {
     ['clean'],
     [{ color: [] }, { background: [] }],
     [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
-    // [],
   ],
-  imageUploader: {
-    upload: (file: any) => {
-      return new Promise((resolve, reject) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        baseAxios
-          .post('upload', formData)
-          .then((res) => {
-            resolve(res.data.data.filename);
-          })
-          .catch((e) => {
-            reject('Upload failed');
-            console.error('Error:', e);
-          });
-      });
-    },
-  },
   clipboard: {
     matchVisual: false,
   },

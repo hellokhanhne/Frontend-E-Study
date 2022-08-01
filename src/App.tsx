@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { VideoCourseOverlay } from './components/common';
+// import { VideoCourseOverlay } from './components/common';
 import LoadingOverlay from './components/common/LoadingOverlay';
 import { AuthContext, IAuthContext } from './context';
 import AdminLayout from './Layout/AdminLayout';

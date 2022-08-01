@@ -3,9 +3,19 @@ import { useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import { AuthContext, IAuthContext } from '~/context';
 import { toastEmit } from '~/utils/toasify';
+import LoginGithub from 'react-login-github';
+import { gapi } from 'gapi-script';
 
 const LoginSocial = () => {
   const { login } = useContext(AuthContext) as IAuthContext;
+
+  gapi.load('client:auth2', () => {
+    gapi.auth2.init({
+      clientId: '603221464013-ujcechbgitt2umrao062r45aucesoe0u.apps.googleusercontent.com',
+      plugin_name: 'chat',
+    });
+  });
+
   const responseGoogle = async (data: any) => {
     console.log(data);
     if (data.tokenId) {
@@ -42,7 +52,7 @@ const LoginSocial = () => {
         <ul className='social_log_45 row'>
           <li className='col-xl-4 col-lg-4 col-md-4 col-4'>
             <GoogleLogin
-              clientId='603221464013-j7dqnur2jq1r2krlq07fkpp8vtbe4e3u.apps.googleusercontent.com'
+              clientId='603221464013-ujcechbgitt2umrao062r45aucesoe0u.apps.googleusercontent.com'
               autoLoad={false}
               render={(renderProps) => (
                 <button type='button' className='sl_btn' onClick={renderProps.onClick}>
@@ -51,6 +61,7 @@ const LoginSocial = () => {
                 </button>
               )}
               onSuccess={responseGoogle}
+              onFailure={responseGoogle}
               cookiePolicy={'single_host_origin'}
             />
           </li>
@@ -69,10 +80,17 @@ const LoginSocial = () => {
             />
           </li>
           <li className='col-xl-4 col-lg-4 col-md-4 col-4'>
-            <button className='sl_btn' type='button'>
+            <LoginGithub
+              clientId='e5436db3ea5b28f0e138'
+              className='sl_btn'
+              scope='name,email,picture'
+              onSuccess={(val: any) => console.log(val)}
+              onFailure={(val: any) => console.log(val)}
+            >
               <i className='ti-github text-dark' />
               Github
-            </button>
+            </LoginGithub>
+            ,
           </li>
         </ul>
       </div>

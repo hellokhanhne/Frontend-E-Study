@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 /* avatar register  */
 .rcs_ico img {
   width: 100%;
@@ -130,4 +134,20 @@
 
 .h-100p {
   height: 100% !important;
+}
+
+.video-course-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.video-course-overlay .edu_wraper.wrapper {
+  margin-bottom: 0;
+  border-radius: 0;
+  height: 100%;
+  overflow-y: auto;
+  transition: all 0.3s linear;
+  width: 520px;
 }

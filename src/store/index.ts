@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import categoryReducer from './reducers/categoryReducer';
+import courseOverlayReducer from './reducers/courseOverlayReducer';
 import courseReducer from './reducers/courseReducer';
 import loadingOverlayReducer from './reducers/loadingOverlayReducer';
 
@@ -9,6 +10,7 @@ export function makeStore() {
       loadingOverlay: loadingOverlayReducer,
       category: categoryReducer,
       course: courseReducer,
+      courseOverlay: courseOverlayReducer,
     },
     devTools: true,
   });

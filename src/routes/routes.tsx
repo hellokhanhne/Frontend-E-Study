@@ -3,6 +3,7 @@ import UpdateCategory from '~/adminPage/Category/UpdateCategory';
 import CreateCourse from '~/adminPage/Course/CreateCourse';
 import ManageCourse from '~/adminPage/Course/ManageCourse';
 import UpdateCourse from '~/adminPage/Course/UpdateCourse';
+import { CourseDetailsManage } from '~/adminPage/CourseDetails';
 
 import Profile from '~/adminPage/Profile';
 import { Home } from '~/pages';
@@ -87,5 +88,9 @@ export const lecturerRoutes: IRoute[] = [
   {
     path: '/manage/course/update/:id',
     element: <UpdateCourse />,
+  },
+  {
+    path: '/manage/courses/:id',
+    element: <CourseDetailsManage />,
   },
 ];

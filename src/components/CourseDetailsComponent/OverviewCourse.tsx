@@ -8,7 +8,7 @@ const OverviewCourse = ({ course }: ICourseCommonProps) => {
       <div className='edu_wraper'>
         <div dangerouslySetInnerHTML={{ __html: course?.description }}></div>
       </div>
-      <ListChapter />
+      <ListChapter course={course} />
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import courseApi from '~/api/CourseApi';
 import {
@@ -11,11 +12,12 @@ import {
 } from '~/components/CourseDetailsComponent';
 import ReviewConextProvider from '~/components/CourseDetailsComponent/context/ReviewContext';
 import { ICourse } from '~/interface';
+import { changeVideoOverlayState } from '~/store/reducers/courseOverlayReducer';
 
 const CourseDetails = () => {
   const { id } = useParams();
   const [course, setCourse] = useState<ICourse | null>(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       const res = await courseApi.getOne(Number(id));
@@ -23,6 +25,15 @@ const CourseDetails = () => {
       setCourse(data);
     })();
   }, []);
+
+  useEffect(() => {
+    course &&
+      dispatch(
+        changeVideoOverlayState({
+          course,
+        }),
+      );
+  }, [course]);
 
   return (
     <div>

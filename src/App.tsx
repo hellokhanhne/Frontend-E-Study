@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { VideoCourseOverlay } from './components/common';
 // import { VideoCourseOverlay } from './components/common';
 import LoadingOverlay from './components/common/LoadingOverlay';
 import { AuthContext, IAuthContext } from './context';
@@ -11,13 +12,14 @@ import ProtectedRouter from './routes/ProtectedRoute';
 
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getAllCategory } from './store/reducers/categoryReducer';
+import { courseOverlaySelector } from './store/reducers/courseOverlayReducer';
 import { loadingSelector } from './store/reducers/loadingOverlayReducer';
 
 function App() {
   const { isLoading } = useAppSelector(loadingSelector);
   const { authState } = useContext(AuthContext) as IAuthContext;
   // dispatch get all category
-
+  const { isShow } = useAppSelector(courseOverlaySelector);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllCategory());
@@ -43,7 +45,7 @@ function App() {
           ))}
         </Routes>
         {isLoading && <LoadingOverlay />}
-        {/* <VideoCourseOverlay /> */}
+        {isShow && <VideoCourseOverlay />}
         <ToastContainer />
       </BrowserRouter>
     </>

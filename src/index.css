@@ -128,12 +128,27 @@
   height: 20px;
 }
 
+.chapter-card .card-action-button {
+  display: none;
+}
+.chapter-card:hover .card-action-button {
+  display: flex;
+}
+
 .cover {
   object-fit: cover;
 }
 
+.contain {
+  object-fit: contain;
+}
+
 .h-100p {
   height: 100% !important;
+}
+
+.border-top {
+  border-top: 1px solid #03b97c;
 }
 
 .video-course-overlay {
@@ -141,6 +156,24 @@
   inset: 0;
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  overflow-x: scroll;
+}
+
+.video-course-overlay .row {
+  position: relative;
+}
+
+.video-course-overlay::-webkit-scrollbar {
+  display: none;
+}
+
+.video-course-overlay .close {
+  position: absolute;
+  top: 20px;
+  font-size: 30px;
+  right: 50px;
+  color: red;
 }
 
 .video-course-overlay .edu_wraper.wrapper {

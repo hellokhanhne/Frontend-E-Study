@@ -15,11 +15,11 @@ const ReviewCard = ({ review }: IReviewCardProps) => {
   return (
     <div className='reviews-comments-item'>
       <div className='review-comments-avatar'>
-        <img src={review?.user.avatar} className='img-fluid h-100p cover' alt='' />
+        <img src={review?.user?.avatar} className='img-fluid h-100p cover' alt='' />
       </div>
       <div className='reviews-comments-item-text'>
         <h4>
-          <a href='#'>{review?.user.firstName + ' ' + review?.user.lastName}</a>
+          <a href='#'>{review?.user?.firstName + ' ' + review?.user?.lastName}</a>
           <span className='reviews-comments-item-date'>
             <i className='ti-calendar theme-cl' />
             {toVnTime(review?.createAt)}
@@ -35,7 +35,7 @@ const ReviewCard = ({ review }: IReviewCardProps) => {
                 );
               })}
           </div>
-          {isAuthenticate && user?.id === review?.user.id && (
+          {isAuthenticate && user?.id === review?.user?.id && (
             <ReviewActionButton idReview={review?.id} />
           )}
         </div>

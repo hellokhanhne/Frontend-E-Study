@@ -1,10 +1,12 @@
 import React, { createContext, useReducer, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import chapterApi from '~/api/chapterApi';
 // import { useDispatch } from 'react-redux';
 import courseApi from '~/api/CourseApi';
 import lessionApi from '~/api/lessionApi';
 
 import { ICourse } from '~/interface';
+import { changeLoading } from '~/store/reducers/loadingOverlayReducer';
 import { toastEmit } from '~/utils/toasify';
 
 interface IInitstate {
@@ -143,7 +145,7 @@ const reducer = (state: IInitstate, action: IAction) => {
 const CourseDetailsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const [selectedChapter, setSelectedChapter] = useState<null | number>(null);
-  // const dispatchRedux = useDispatch();
+  const dispatchRedux = useDispatch();
 
   const getCourse = async (id: number) => {
     const res = await courseApi.getOne(Number(id));
@@ -161,8 +163,10 @@ const CourseDetailsContextProvider = ({ children }: { children: React.ReactNode 
 
   const createChapter = async (payload: FormData) => {
     try {
+      dispatchRedux(changeLoading(true));
       const res = await chapterApi.create(payload);
       const { data } = res.data;
+      dispatchRedux(changeLoading(false));
       dispatch({
         type: ActionKind.ADD_CHAPTER,
         payload: {
@@ -175,8 +179,10 @@ const CourseDetailsContextProvider = ({ children }: { children: React.ReactNode 
 
   const updateChapter = async (id: number, payload: FormData) => {
     try {
+      dispatchRedux(changeLoading(true));
       const res = await chapterApi.update(id, payload);
       const { data } = res.data;
+      dispatchRedux(changeLoading(false));
       dispatch({
         type: ActionKind.UPDATE_CHAPTER,
         payload: data,
@@ -200,8 +206,10 @@ const CourseDetailsContextProvider = ({ children }: { children: React.ReactNode 
 
   const createLession = async (payload: FormData, chapter_id: number) => {
     try {
+      dispatchRedux(changeLoading(true));
       const res = await lessionApi.create(payload);
       const { data } = res.data;
+      dispatchRedux(changeLoading(false));
       dispatch({
         type: ActionKind.ADD_LESSION,
         payload: {
@@ -214,9 +222,10 @@ const CourseDetailsContextProvider = ({ children }: { children: React.ReactNode 
 
   const updateLession = async (id: number, payload: FormData, chapter_id: number) => {
     try {
-      console.log('chapter_id' + chapter_id);
+      dispatchRedux(changeLoading(true));
       const res = await lessionApi.put(id, payload);
       const { data } = res.data;
+      dispatchRedux(changeLoading(false));
       dispatch({
         type: ActionKind.UPDATE_LESSION,
         payload: {

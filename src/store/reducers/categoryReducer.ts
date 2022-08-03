@@ -21,15 +21,21 @@ export const getOneCategory = createAsyncThunk('category/getOne', async (id: num
   return (await categoryApi.getOne(id)).data.data;
 });
 
-export const createCategory = createAsyncThunk('category/create', async (payload: FormData) => {
-  try {
-    const res = await categoryApi.create(payload);
-    const { data } = res.data;
-    return data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-});
+export const createCategory = createAsyncThunk(
+  'category/create',
+  async (payload: FormData, { dispatch }) => {
+    try {
+      dispatch(changeLoading(true));
+      const res = await categoryApi.create(payload);
+      const { data } = res.data;
+      dispatch(changeLoading(false));
+      return data;
+    } catch (error: any) {
+      dispatch(changeLoading(false));
+      throw new Error(error);
+    }
+  },
+);
 
 export const updateCategory = createAsyncThunk(
   'category/update',

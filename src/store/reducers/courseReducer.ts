@@ -22,16 +22,22 @@ export const getOneCourse = createAsyncThunk('course/getOne', async (id: number)
   return (await courseApi.getOne(id)).data.data;
 });
 
-export const createCourse = createAsyncThunk('course/create', async (payload: FormData) => {
-  try {
-    const res = await courseApi.create(payload);
-    const { data } = res.data;
-    Swal.fire('Create course successfully !', '', 'success');
-    return data;
-  } catch (error: any) {
-    throw new Error(error);
-  }
-});
+export const createCourse = createAsyncThunk(
+  'course/create',
+  async (payload: FormData, { dispatch }) => {
+    try {
+      dispatch(changeLoading(true));
+      const res = await courseApi.create(payload);
+      const { data } = res.data;
+      Swal.fire('Create course successfully !', '', 'success');
+      dispatch(changeLoading(false));
+      return data;
+    } catch (error: any) {
+      dispatch(changeLoading(false));
+      throw new Error(error);
+    }
+  },
+);
 
 export const updateCourse = createAsyncThunk(
   'course/update',

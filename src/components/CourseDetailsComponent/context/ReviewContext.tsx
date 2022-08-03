@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import commentApi from '~/api/commentApi';
 import { AuthContext, IAuthContext } from '~/context';
 
 import { IReview } from '~/interface';
+import { changeLoading } from '~/store/reducers/loadingOverlayReducer';
 import { toastEmit } from '~/utils/toasify';
 
 interface IInitState {
@@ -46,6 +48,8 @@ const ReviewConextProvider = ({
     totalElements: 0,
   });
 
+  const dispatchRedux = useDispatch();
+
   const [page, setPage] = useState(1);
 
   const getReviews = async () => {
@@ -83,8 +87,10 @@ const ReviewConextProvider = ({
           type: 'error',
         });
       }
+      dispatchRedux(changeLoading(true));
       const res = await commentApi.create(payload);
       const { data } = res.data;
+      dispatchRedux(changeLoading(true));
       setReviewState({
         ...reviewSate,
         totalPages: Math.ceil((reviewSate.totalElements + 1) / limit),

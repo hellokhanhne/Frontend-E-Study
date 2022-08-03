@@ -4,7 +4,7 @@ import { ICourse, ILession } from '~/interface/course.interface';
 import { changeVideoOverlayState } from '~/store/reducers/courseOverlayReducer';
 
 import { formatVideoTime } from '~/utils/formdataUtils';
-type lessionType = 'progressing' | 'unview' | 'complete';
+// type lessionType = 'progressing' | 'unview' | 'complete';
 
 const Lession = ({ lession }: { lession: ILession; course: ICourse }) => {
   const [duration, setDuration] = useState(0);

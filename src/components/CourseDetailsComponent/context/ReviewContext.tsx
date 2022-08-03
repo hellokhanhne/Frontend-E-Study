@@ -90,7 +90,7 @@ const ReviewConextProvider = ({
       dispatchRedux(changeLoading(true));
       const res = await commentApi.create(payload);
       const { data } = res.data;
-      dispatchRedux(changeLoading(true));
+      dispatchRedux(changeLoading(false));
       setReviewState({
         ...reviewSate,
         totalPages: Math.ceil((reviewSate.totalElements + 1) / limit),
@@ -103,7 +103,9 @@ const ReviewConextProvider = ({
           ...reviewSate.reviews,
         ],
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatchRedux(changeLoading(false));
+    }
   };
 
   const deleteReview = async (id: number) => {

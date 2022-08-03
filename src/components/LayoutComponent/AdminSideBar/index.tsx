@@ -84,9 +84,11 @@ const AdminSideBar = () => {
               <li>
                 <Link to='/manage/course/create'>Add New Course</Link>
               </li>
-              <li>
-                <Link to='/manage/category'>Course Category</Link>
-              </li>
+              {user?.role === 'ROLE_ADMIN' && (
+                <li>
+                  <Link to='/manage/category'>Course Category</Link>
+                </li>
+              )}
               {/* <li>
                 <Link to='coupons.html'>Coupons</Link>
               </li> */}
